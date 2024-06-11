@@ -1,0 +1,49 @@
+CLIENTES
+idCliente PK
+nombre
+direccion
+limiteCredito
+vencimiento
+localidad
+
+FACTURAS
+nroFactura PK
+cliente FK
+fecha
+total
+vencimiento
+
+FACTURASXARTICULOS
+nroFactura PK FK
+idArticulo PK FK
+cantidad
+precio
+
+ARTICULOS
+idArticulo PK
+descripcion
+stock
+rubro
+
+VENDEDORES
+idVendedor PK
+nombre
+porcentajeComision
+
+RUBROS
+idRubro PK
+descripcion
+
+1. Listar el nombre del cliente que mas compro en el año 2001
+2. Listar el articulo que mas se vendio en el año 2000
+3. Listar los clinetes con el monto total vendido, para aquellos clientes que superen un monto total vendido de 1000
+4. Listar los clientes que compraron en el 2000 pero no en el 2001
+5. Listar los clientes que no compraron en el 2001 pero que tengan un monto de compras mayor que 1000
+6. Listar los clientes cuya cantidad de facturas sea mayor a 20 en el año 2000
+7. Listar los clientes a los que le vendio un vendedor distinto al asignado para el
+8. Listar los articulos que se vendieron en el 2000 pero no en el 2001
+9. Listar el articulo que mas se vedio de cada rubro
+10. Listar las facturas de clientes que no sean de Cordoba que compraron articulos del rubro "General" y tengan mas de 10 items
+11. Listar la comision del año 2000 de los vendedores que le vendieron a clientes de Cordoba y que ademas vendieron articulos del rubro "Importados"
+12. Listar el monto promedio facturado por dia para los dias que superen el promedio por dia del año 2000
+13. Listar el cliente que mas compro de cada vendedor
