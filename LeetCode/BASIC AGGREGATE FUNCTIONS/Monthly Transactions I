@@ -44,3 +44,21 @@ Output:
 +----------+---------+-------------+----------------+--------------------+-----------------------+
 
 ------------------------------- MY SOLUTION -------------------------------
+SELECT DATE_FORMAT(T.trans_date, '%Y-%m') AS 'month', 
+        T.country, COUNT(*) AS 'trans_count', 
+        IFNULL(
+            (SELECT COUNT(*) 
+            FROM Transactions T1 
+            WHERE (T1.state LIKE 'approved') AND ((T1.country = T.country) OR (T1.country IS NULL AND T.country IS NULL)) AND (MONTH(T1.trans_date) = MONTH(T.trans_date)) AND (YEAR(T1.trans_date) = YEAR(T.trans_date))
+        ), 0) AS 'approved_count', 
+        SUM(amount) AS 'trans_total_amount', 
+        IFNULL(
+            (
+                SELECT SUM(amount) 
+                FROM Transactions T2
+                WHERE (T2.state LIKE 'approved') AND ((T2.country = T.country) OR (T2.country IS NULL AND T.country IS NULL)) AND (MONTH(T2.trans_date) = MONTH(T.trans_date)) AND (YEAR(T2.trans_date) = YEAR(T.trans_date))
+            )
+        , 0) AS 'approved_total_amount'
+
+FROM Transactions T
+GROUP BY 1, 2
